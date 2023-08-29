@@ -6,7 +6,7 @@
 /*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:42:12 by machi             #+#    #+#             */
-/*   Updated: 2023/07/04 00:19:20 by machi            ###   ########.fr       */
+/*   Updated: 2023/08/29 15:38:16 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	write(STDOUT_FILENO, &c, 1);
 }
 
-int	ft_print_char(char	c)
+int	ft_print_char(char c)
 {
 	int	count;
 

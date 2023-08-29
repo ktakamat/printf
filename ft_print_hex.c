@@ -6,13 +6,13 @@
 /*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 20:45:50 by machi             #+#    #+#             */
-/*   Updated: 2023/08/24 20:29:12 by machi            ###   ########.fr       */
+/*   Updated: 2023/08/29 15:38:39 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int count_hex(unsigned int	n)
+int	count_hex(unsigned int n)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ int count_hex(unsigned int	n)
 	return (len);
 }
 
-void	ft_puthex(unsigned int	n, const char format)
+void	ft_puthex(unsigned int n, const char format)
 {
 	if (n < 16)
 	{
@@ -61,5 +61,5 @@ int	ft_print_hex(unsigned int n, const char format)
 		ft_puthex(n, format);
 		count += count_hex(n);
 	}
-	return(count);
+	return (count);
 }

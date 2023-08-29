@@ -6,13 +6,13 @@
 /*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 22:19:41 by machi             #+#    #+#             */
-/*   Updated: 2023/07/09 12:16:57 by machi            ###   ########.fr       */
+/*   Updated: 2023/08/29 15:40:03 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_format(va_list *ap, const char *itr)
+int	parse_format(va_list *ap, const char *itr)
 {
 	int	count;
 
@@ -24,7 +24,7 @@ int ft_format(va_list *ap, const char *itr)
 	else if (*itr == 'd' || *itr == 'i')
 		count += ft_print_nbr(va_arg(*ap, int));
 	else if (*itr == 'u')
-		count += ft_print_unbr(va_arg(*ap, int));
+		count += ft_print_unbr(va_arg(*ap, unsigned int));
 	else if (*itr == 'p')
 		count += ft_print_ptr(va_arg(*ap, unsigned long long));
 	else if (*itr == 'x' || *itr == 'X')
@@ -36,10 +36,10 @@ int ft_format(va_list *ap, const char *itr)
 
 int	ft_printf(const char *format, ...)
 {
-	int	count;
+	int			count;
 	const char	*itr;
 	va_list		ap;
-	
+
 	va_start(ap, format);
 	itr = format;
 	count = 0;
@@ -48,7 +48,7 @@ int	ft_printf(const char *format, ...)
 		if (*itr == '%')
 		{
 			itr++;
-			count = count + ft_format(&ap, itr);
+			count += parse_format(&ap, itr);
 		}
 		else if (*itr != '\0')
 			count += ft_print_char(*itr);

@@ -1,67 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: machi <machi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 12:49:12 by machi             #+#    #+#             */
-/*   Updated: 2023/07/06 17:33:28 by machi            ###   ########.fr       */
+/*   Created: 2023/07/03 02:35:16 by machi             #+#    #+#             */
+/*   Updated: 2023/08/29 15:39:16 by machi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	count_digits(int n)
+int	count_ptr(uintptr_t n)
 {
-	int	count;
-	
-	count = 0;
-	if (n <= 0)
-		count++;
+	int	len;
+
+	len = 0;
 	while (n)
 	{
-		count++;
-		n /= 10;
+		len++;
+		n /= 16;
 	}
-	return(count);
+	return (len);
 }
 
-void	ft_putnbr(int	n)
+void	ft_putptr(uintptr_t n)
 {
-	if (0 <= n && n < 10)
-		ft_print_char(n + '0');
-	else if (10 <= n)
+	if (n < 16)
 	{
-		ft_putnbr(n / 10);
-		ft_print_char(n % 10 + '0');
+		if (n <= 9)
+			ft_print_char(n + '0');
+		else
+			ft_print_char(n - 10 + 'a');
 	}
 	else
 	{
-		if (n == INT_MIN)
-			ft_print_str("-2147483648");
-		else
-		{
-			ft_print_char('-');
-			ft_putchar(-1 * n);
-		}
+		ft_putptr(n / 16);
+		ft_putptr(n % 16);
 	}
 }
 
-int	ft_print_nbr(int	n)
+int	ft_print_ptr(unsigned long long ptr)
 {
 	int	count;
 
 	count = 0;
-	if (!n)
-	{
-			ft_putnbr(0);
-			count++;
-	}
+	count += ft_print_str("0x");
+	if (ptr == 0)
+		count += ft_print_char('0');
 	else
 	{
-		ft_putnbr(n);
-		count += count_digits(n);
+		ft_putptr(ptr);
+		count += count_ptr(ptr);
 	}
 	return (count);
 }
